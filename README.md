@@ -1,5 +1,7 @@
 This web application is for showing and sorting movie api from TMDB.
-It was made by ReactJS
+You can get your own api from https://developers.themoviedb.org/4/getting-started
+
+It was made by ReactJS.
 
 What I learned from making project,
 1. Component life cycle
@@ -17,3 +19,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
+Reference
+https://www.youtube.com/watch?v=bqSSLr8A8PU
+https://academy.nomadcoders.co/courses/216871/lectures/12913620
