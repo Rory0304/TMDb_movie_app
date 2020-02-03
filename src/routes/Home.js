@@ -1,7 +1,8 @@
 import React from "react";
 import "./Home.css";
 import Axios from "axios";
-import Movie from "./Movie";
+import Movie from "../components/Movie";
+import Page from "../components/Page";
 
 class Home extends React.Component {
   constructor(props) {
@@ -10,6 +11,9 @@ class Home extends React.Component {
 
     this.state = {
       isLoading: true,
+      url: "",
+      page: 1,
+      total_pages: 1,
       db: []
     };
   }
@@ -21,39 +25,86 @@ class Home extends React.Component {
       "https://api.themoviedb.org/3/search/movie?api_key=b1306395631dc84cde154096963c13db&sort_by=popularity.desc&query=" +
         searchitm
     );
-    this.setState({ isLoading: false, db: data });
+    this.setState({
+      isLoading: false,
+      db: data,
+      page: data.page,
+      total_pages: data.total_pages
+    });
   };
 
-  //right after render
-  componentDidMount = async event => {
+  getMoviesByPopular = async event => {
     const { data } = await Axios.get(
       "https://api.themoviedb.org/3/movie/popular?api_key=b1306395631dc84cde154096963c13db&language=en-US"
     );
-    this.setState({ isLoading: false, db: data });
+    this.setState({
+      isLoading: false,
+      db: data,
+      page: data.page,
+      total_pages: data.total_pages
+    });
+  };
+
+  getMoviesByTop = async event => {
+    const { data } = await Axios.get(
+      "https://api.themoviedb.org/3/movie/top_rated?api_key=b1306395631dc84cde154096963c13db&language=en-US"
+    );
+    this.setState({
+      isLoading: false,
+      db: data,
+      page: data.page,
+      total_pages: data.total_pages
+    });
+  };
+
+  //right after render
+  componentDidMount = async () => {
+    const url =
+      "https://api.themoviedb.org/3/movie/popular?api_key=b1306395631dc84cde154096963c13db&language=en-US";
+    const { data } = await Axios.get(url);
+    this.setState({
+      isLoading: false,
+      db: data,
+      url: url,
+      page: data.page,
+      total_pages: data.total_pages
+    });
+  };
+
+  getNextPage = () => {
+    console.log("here");
+    this.setState(current => ({ page: current.page + 1 }));
+  };
+
+  getPrevPage = () => {
+    this.setState(current => ({ page: current.page - 1 }));
   };
 
   render() {
-    const { isLoading, db } = this.state;
+    const { isLoading, db, page, total_pages } = this.state;
     return (
       <div className="Home">
         <header>
-          <h1>The MovieDB</h1>
+          <a href="/">
+            <h1>The MovieDB</h1>
+          </a>
         </header>
+
         <div class="nav">
           <ul>
-            <li>Popular</li>
-            <li>Top rated</li>
+            <li onClick={this.getMoviesByPopular}>Popular</li>
+            <li onClick={this.getMoviesByTop}>Top rated</li>
             <li>Upcoming</li>
             <li>Now playing</li>
           </ul>
-          <div className="search">
-            <input
-              onChange={this.getMoviesBytitle.bind()}
-              placeholder="Enter Search Items"
-              className="inputbox"
-            ></input>
-          </div>
+
+          <input
+            onChange={this.getMoviesBytitle.bind()}
+            placeholder="Enter Search Items"
+            className="inputbox"
+          ></input>
         </div>
+
         <div className="contents">
           {isLoading ? (
             <div className="loading">
@@ -72,6 +123,7 @@ class Home extends React.Component {
             ))
           )}
         </div>
+        <Page page={page} total_pages={total_pages}></Page>
       </div>
     );
   }
