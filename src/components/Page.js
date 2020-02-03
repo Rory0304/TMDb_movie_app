@@ -1,14 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { getNextPage, getPrevPage } from "../routes/Home";
 import "./Page.css";
+// import { Link } from "react-router-dom";
 
-function Page({ page, total_pages }) {
+function Page({ getPrevPage, getNextPage, page, total_pages }) {
   if (page === 1) {
     return (
       <div className="footer">
-        <div className="currnet">{page}</div>
-        <div className="next" onClick={this.getNextPage}>
+        <div className="currnet">
+          {page}/{total_pages}
+        </div>
+        <div className="next" onClick={() => getNextPage()}>
           Next &rarr;
         </div>
       </div>
@@ -16,20 +18,24 @@ function Page({ page, total_pages }) {
   } else if (page === total_pages) {
     return (
       <div className="footer">
-        <div className="prev" onClick={this.getPrevPage}>
+        <div className="prev" onClick={() => getPrevPage()}>
           &larr; Prev
         </div>
-        <div className="currnet">{page}</div>
+        <div className="currnet">
+          {page}/{total_pages}
+        </div>
       </div>
     );
   } else {
     return (
       <div className="footer">
-        <div className="prev" onClick={this.getPrevPage}>
+        <div className="prev" onClick={() => getPrevPage()}>
           &larr; Prev
         </div>
-        <div className="currnet">{page}</div>
-        <div className="next" onClick={this.getNextPage}>
+        <div className="currnet">
+          {page}/{total_pages}
+        </div>
+        <div className="next" onClick={() => getNextPage()}>
           Next &rarr;
         </div>
       </div>

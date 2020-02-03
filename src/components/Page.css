@@ -1,4 +1,6 @@
 .footer {
+  position: sticky;
+  bottom: 0;
   text-align: center;
   background-color: white;
 }
