@@ -1,5 +1,5 @@
 {
-  "name": "naver_movie_app",
+  "name": "tmdb_movie_app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
