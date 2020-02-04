@@ -56,7 +56,7 @@ class TopRate extends React.Component {
     this.getMovieList(1);
   }
 
-  getNextPage = async () => {
+  getNextPage = () => {
     this.getMovieList(this.state.page + 1);
   };
 
@@ -65,6 +65,7 @@ class TopRate extends React.Component {
   };
 
   render() {
+    console.log("rendering");
     const { isLoading, db, page, total_pages } = this.state;
     return (
       <div className="Home">
