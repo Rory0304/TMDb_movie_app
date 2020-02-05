@@ -1,6 +1,7 @@
 {
   "name": "tmdb_movie_app",
   "version": "0.1.0",
+  "homepage": "http://Rory0304.github.io/TMDb_movie_app",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -33,7 +34,6 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ],
-    "homepage": "http://rory0304.github.io/tmdb_movie_app"
+    ]
   }
 }
